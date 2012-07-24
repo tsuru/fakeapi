@@ -15,3 +15,8 @@ def remove_instance(request, name):
 @require_http_methods(["POST"])
 def bind(request, name):
     return HttpResponse(status=201)
+
+
+@require_http_methods(["DELETE"])
+def unbind(request, name, host):
+    pass
