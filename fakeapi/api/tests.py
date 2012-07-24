@@ -18,3 +18,8 @@ class AddInstanceTestCase(TestCase):
         request = RequestFactory().delete("/")
         response = add_instance(request)
         self.assertEqual(405, response.status_code)
+
+    def test_add_instance(self):
+        request = RequestFactory().post("/", {"name": "plains_of_dawn"})
+        response = add_instance(request)
+        self.assertEqual(201, response.status_code)
