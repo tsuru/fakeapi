@@ -38,4 +38,4 @@ def unbind(request, name, host):
 
 @require_http_methods(["GET"])
 def status(request, name):
-    pass
+    return HttpResponse(status=204)

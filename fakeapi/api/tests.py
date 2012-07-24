@@ -98,3 +98,8 @@ class StatusTestCase(TestCase):
         request = RequestFactory().post("/")
         response = status(request, "somename")
         self.assertEqual(405, response.status_code)
+
+    def test_status(self):
+        request = RequestFactory().get("/")
+        response = status(request, "somename")
+        self.assertEqual(204, response.status_code)
