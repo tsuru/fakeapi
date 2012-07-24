@@ -1,17 +1,8 @@
 from django.conf.urls import patterns, include, url
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'fakeapi.views.home', name='home'),
-    # url(r'^fakeapi/', include('fakeapi.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^resources/$', 'fakeapi.api.views.add_instance'),  # post
+    url(r'^resources/(?P<name>[\w-]+)/$', 'fakeapi.api.views.bind_or_remove_instance'),  # post and delete
+    url(r'^resources/(?P<name>[\w-]+)/host/(?P<host>[\w.]+)/$', 'fakeapi.api.views.unbind'),  # delete
 )
