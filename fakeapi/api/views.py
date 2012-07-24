@@ -10,3 +10,8 @@ def add_instance(request):
 @require_http_methods(["DELETE"])
 def remove_instance(request, name):
     return HttpResponse()
+
+
+@require_http_methods(["POST"])
+def bind(request):
+    pass
