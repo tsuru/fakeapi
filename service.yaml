@@ -1,0 +1,4 @@
+id: fakeapi
+endpoint:
+  production: fakeapi.com
+  test: localhost:8000
