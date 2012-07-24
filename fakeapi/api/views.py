@@ -22,6 +22,15 @@ def bind(request, name):
 
 
 @csrf_exempt
+@require_http_methods(["POST", "DELETE"])
+def bind_or_remove_instance(request, name):
+    if request.method == "POST":
+        return bind(request, name)
+    if request.method == "DELETE":
+        return remove_instance(remove_instance, name)
+
+
+@csrf_exempt
 @require_http_methods(["DELETE"])
 def unbind(request, name, host):
     return HttpResponse()
