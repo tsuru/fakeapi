@@ -28,13 +28,18 @@ class AddInstanceTestCase(TestCase):
 class RemoveInstanceTestCase(TestCase):
     def test_remove_instance_should_returns_405_when_method_is_not_delete(self):
         request = RequestFactory().get("/")
-        response = remove_instance(request)
+        response = remove_instance(request, "somename")
         self.assertEqual(405, response.status_code)
 
         request = RequestFactory().put("/")
-        response = remove_instance(request)
+        response = remove_instance(request, "somename")
         self.assertEqual(405, response.status_code)
 
         request = RequestFactory().post("/")
-        response = remove_instance(request)
+        response = remove_instance(request, "somename")
         self.assertEqual(405, response.status_code)
+
+    def test_remove_instance(self):
+        request = RequestFactory().delete("/")
+        response = remove_instance(request, "somename")
+        self.assertEqual(200, response.status_code)
