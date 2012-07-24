@@ -1,16 +1,20 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
+from django.test.client import RequestFactory
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+from fakeapi.api.views import add_instance
+
+
+class AddInstanceTestCase(TestCase):
+    def test_add_instance_should_returns_405_when_method_is_not_post(self):
+        request = RequestFactory().get("/")
+        response = add_instance(request)
+        self.assertEqual(405, response.status_code)
+
+        request = RequestFactory().put("/")
+        response = add_instance(request)
+        self.assertEqual(405, response.status_code)
+
+        request = RequestFactory().delete("/")
+        response = add_instance(request)
+        self.assertEqual(405, response.status_code)
