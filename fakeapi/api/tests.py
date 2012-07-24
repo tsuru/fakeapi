@@ -78,3 +78,8 @@ class UnBindTestCase(TestCase):
         request = RequestFactory().post("/")
         response = unbind(request, "somename", "host")
         self.assertEqual(405, response.status_code)
+
+    def test_unbind(self):
+        request = RequestFactory().delete("/")
+        response = unbind(request, "somename", "host")
+        self.assertEqual(200, response.status_code)

@@ -19,4 +19,4 @@ def bind(request, name):
 
 @require_http_methods(["DELETE"])
 def unbind(request, name, host):
-    pass
+    return HttpResponse()
