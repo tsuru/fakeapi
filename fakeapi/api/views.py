@@ -34,3 +34,8 @@ def bind_or_remove_instance(request, name):
 @require_http_methods(["DELETE"])
 def unbind(request, name, host):
     return HttpResponse()
+
+
+@require_http_methods(["GET"])
+def status(request, name):
+    pass

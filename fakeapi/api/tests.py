@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 
 
-from fakeapi.api.views import add_instance, remove_instance, bind, unbind
+from fakeapi.api.views import add_instance, remove_instance, bind, unbind, status
 
 
 class AddInstanceTestCase(TestCase):
@@ -83,3 +83,18 @@ class UnBindTestCase(TestCase):
         request = RequestFactory().delete("/")
         response = unbind(request, "somename", "host")
         self.assertEqual(200, response.status_code)
+
+
+class StatusTestCase(TestCase):
+    def test_status_should_returns_405_when_method_is_not_get(self):
+        request = RequestFactory().delete("/")
+        response = status(request, "somename")
+        self.assertEqual(405, response.status_code)
+
+        request = RequestFactory().put("/")
+        response = status(request, "somename")
+        self.assertEqual(405, response.status_code)
+
+        request = RequestFactory().post("/")
+        response = status(request, "somename")
+        self.assertEqual(405, response.status_code)
