@@ -48,13 +48,18 @@ class RemoveInstanceTestCase(TestCase):
 class BindTestCase(TestCase):
     def test_bind_should_returns_405_when_method_is_not_post(self):
         request = RequestFactory().get("/")
-        response = bind(request)
+        response = bind(request, "somename")
         self.assertEqual(405, response.status_code)
 
         request = RequestFactory().put("/")
-        response = bind(request)
+        response = bind(request, "somename")
         self.assertEqual(405, response.status_code)
 
         request = RequestFactory().delete("/")
-        response = bind(request)
+        response = bind(request, "somename")
         self.assertEqual(405, response.status_code)
+
+    def test_bind(self):
+        request = RequestFactory().post("/", {})
+        response = bind(request, "somename")
+        self.assertEqual(201, response.status_code)
