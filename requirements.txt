@@ -1,1 +1,2 @@
-Django==1.4
+Django==1.4.1
+# crane-ec2==0.1.3
