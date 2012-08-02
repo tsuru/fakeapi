@@ -3,14 +3,14 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
 
-#def create_ec2_instance(ec2_client, instance):
-# #    receives an instance object
-# #    the creation and population of the instance is responsibility of the api
-# #    it's common to record it in the database, the the api can track more easily
-# #    it's instances data
+# def create_ec2_instance(ec2_client, instance):
+#    # receives an instance object
+#    # the creation and population of the instance is responsibility of the api
+#    # it's common to record it in the database, the the api can track more easily
+#    # it's instances data
 #    if not ec2_client.run(instance):
 #       raise Exception("Failed to create EC2 instance.")
-# #   do success stuff
+#    # do success stuff
 
 
 @csrf_exempt
