@@ -6,6 +6,8 @@ import json
 
 from flask import abort, Flask, request
 
+import auth
+
 app = Flask(__name__)
 
 if not app.debug:
@@ -18,6 +20,7 @@ instances = []
 
 
 @app.route("/resources/plans", methods=["GET"])
+@auth.required
 def plans():
     plans = [{"name": "small", "description": "small instance"},
              {"name": "medium", "description": "medium instance"},
@@ -27,6 +30,7 @@ def plans():
 
 
 @app.route("/resources", methods=["POST"])
+@auth.required
 def add_instance():
     name = request.form.get("name")
     plan = request.form.get("plan")
@@ -36,6 +40,7 @@ def add_instance():
 
 
 @app.route("/resources/<name>/bind-app", methods=["POST"])
+@auth.required
 def bind_app(name):
     app_host = request.form.get("app-host")
     index, instance = _get_instance(name)
@@ -46,6 +51,7 @@ def bind_app(name):
 
 
 @app.route("/resources/<name>/bind-app", methods=["DELETE"])
+@auth.required
 def unbind_app(name):
     app_host = request.form.get("app-host")
     index, instance = _get_instance(name)
@@ -58,6 +64,7 @@ def unbind_app(name):
 
 
 @app.route("/resources/<name>/bind", methods=["POST"])
+@auth.required
 def bind_unit(name):
     unit_host = request.form.get("unit-host")
     index, instance = _get_instance(name)
@@ -67,6 +74,7 @@ def bind_unit(name):
 
 
 @app.route("/resources/<name>/bind", methods=["DELETE"])
+@auth.required
 def unbind_unit(name):
     unit_host = request.form.get("unit-host")
     index, instance = _get_instance(name)
@@ -79,6 +87,7 @@ def unbind_unit(name):
 
 
 @app.route("/resources/<name>", methods=["DELETE"])
+@auth.required
 def remove_instance(name):
     global instances
     _get_instance(name)
@@ -87,6 +96,7 @@ def remove_instance(name):
 
 
 @app.route("/resources/<name>/status", methods=["GET"])
+@auth.required
 def status(name):
     _get_instance(name)
     return "", 204
