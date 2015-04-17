@@ -93,7 +93,7 @@ def status(name):
 
 
 @app.route("/list-instances", methods=["GET"])
-def instances():
+def list_instances():
     return json.dumps(instances), 200
 
 
